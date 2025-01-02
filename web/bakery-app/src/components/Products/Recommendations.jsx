@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import axios from '../../api/api';
+import axios from '../../../api/api';
 
 const Recommendations = () => {
   const [recommendations, setRecommendations] = useState([]);
