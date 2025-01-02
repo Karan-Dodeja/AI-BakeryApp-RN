@@ -1,9 +1,16 @@
-import {View, Text} from 'react-native';
 import React from 'react';
-import AppNavigator from './src/navigation/AppNavigator';
+import { SafeAreaView } from 'react-native';
+import AuthProvider from './src/context/AuthContext';
+import Navigation from './src/navigation/Navigation';
 
 const App = () => {
-  return <AppNavigator />;
+  return (
+    <AuthProvider>
+      <SafeAreaView style={{ flex: 1 }}>
+        <Navigation />
+      </SafeAreaView>
+    </AuthProvider>
+  );
 };
 
 export default App;
