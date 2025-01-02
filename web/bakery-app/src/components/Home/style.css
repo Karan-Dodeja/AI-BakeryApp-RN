@@ -1,0 +1,187 @@
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+}
+
+.container {
+  max-width: "100%";
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.hero-section {
+  /* background-image: url('./images/hero-image.jpg'); */
+  background-size: cover;
+  background-position: center;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #fff;
+}
+
+.hero-section h1 {
+  font-size: 48px;
+  margin-bottom: 20px;
+}
+
+.product-range-section {
+  background-color: #f7f7f7;
+  padding: 20px;
+}
+
+.product-range-section h2 {
+  font-size: 36px;
+  margin-bottom: 20px;
+}
+
+.product-range-section ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.product-range-section li {
+  margin-bottom: 20px;
+}
+
+.product-range-section img {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+  margin-bottom: 20px;
+}
+
+.bakery-details-section {
+  background-color: #fff;
+  padding: 20px;
+}
+
+.bakery-details-section h2 {
+  font-size: 36px;
+  margin-bottom: 20px;
+}
+
+.bakery-details-section p {
+  margin-bottom: 11px;
+}
+
+.benefits-of-bread-section {
+  background-color: #f7f7f7;
+  padding: 20px;
+}
+
+.benefits-of-bread-section h2 {
+  font-size: 36px;
+  margin-bottom: 20px;
+}
+
+.benefits-of-bread-section ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.benefits-of-bread-section li {
+  margin-bottom: 20px;
+}
+
+.popular-products-section {
+  background-color: #fff;
+  padding: 20px;
+}
+
+.popular-products-section h2 {
+  font-size: 36px;
+  margin-bottom: 20px;
+}
+
+.popular-products-section ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.popular-products-section li {
+  margin-bottom: 20px;
+}
+
+.testimonials-section {
+  background-color: #f7f7f7;
+  padding: 20px;
+}
+
+.testimonials-section h2 {
+  font-size: 36px;
+  margin-bottom: 20px;
+}
+
+.testimonials-section p {
+  margin-bottom: 20px;
+}
+
+.contact-section {
+  background-color: #fff;
+  padding: 20px;
+}
+
+.contact-section h2 {
+  font-size: 36px;
+  margin-bottom: 20px;
+}
+
+.contact-section form {
+  margin-top: 20px;
+}
+
+.contact-section input, .contact-section textarea {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 20px;
+  border: 1px solid #ccc;
+}
+
+.contact-section button[type="submit"] {
+  background-color: #4CAF50;
+  color: #fff;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.contact-section button[type="submit"]:hover {
+  background-color: #3e8e41;
+}
+
+.footer {
+  background-color: #333;
+  color: #fff;
+  padding: 10px;
+  text-align: center;
+}
+
+.footer p {
+  margin-bottom: 10px;
+}
+
+.footer ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.footer li {
+  display: inline-block;
+  margin-right: 20px;
+}
+
+.footer a {
+  color: #fff;
+  text-decoration: none;
+}
+
+.footer a:hover {
+  color: #ccc;
+}

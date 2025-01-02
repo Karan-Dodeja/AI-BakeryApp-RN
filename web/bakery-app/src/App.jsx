@@ -5,12 +5,14 @@ import Login from "./components/Auth/Login";
 import Preferences from "./components/Profile/Preferences";
 import ProductList from "./components/Products/ProductsList";
 import Recommendations from "./components/Products/Recommendations";
+import Home from "./components/Home/Home";
 
 function App() {
   return (
     <Router>
       <Routes>
-        <Route path="/" element={<ProductList />} />
+        <Route path="/" element={<Home />} />
+        <Route path="/products" element={<ProductList />} />
         <Route path="/recommendations" element={<Recommendations />} />
         <Route exact path="/signup" element={<Signup />} />
         <Route path="/login" element={<Login />} />
