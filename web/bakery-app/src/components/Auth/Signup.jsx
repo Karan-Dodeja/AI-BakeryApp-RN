@@ -45,9 +45,11 @@ const Signup = () => {
           "Content-Type": "application/json",
         },
       });
-      if (response) {
+      if (response.data.token) {
         setSignupSuccess(true);
-        alert("Signup successful! Redirecting...");
+        // Store token and role in localStorage
+        localStorage.setItem("token", response.data.token);
+        localStorage.setItem("role", response.data.role);
         // Redirect to login page after successful signup
         navigate("/login", { replace: false });
       } else {

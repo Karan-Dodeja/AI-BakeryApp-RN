@@ -35,7 +35,9 @@ const Login = () => {
         },
       });
       if (response.data.token) {
+        // Store token and role in localStorage
         localStorage.setItem("token", response.data.token);
+        localStorage.setItem("role", response.data.role);
         // Prevent from going back to the login page
         navigate("/", { replace: true });
       } else {

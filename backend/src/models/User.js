@@ -1,5 +1,5 @@
-import mongoose from 'mongoose';
 import bcrypt from 'bcryptjs';
+import mongoose from 'mongoose';
 
 const userSchema = new mongoose.Schema({
   name: { type: String, required: true },
@@ -11,6 +11,7 @@ const userSchema = new mongoose.Schema({
     vegan: { type: Boolean, default: false },
     allergens: { type: [String], default: [] },
   },
+  role: { type: String, default: 'user' }, // Add role field
 }, { timestamps: true });
 
 // Hash password before saving
@@ -18,6 +19,16 @@ userSchema.pre('save', async function (next) {
   if (!this.isModified('password')) return next();
   const salt = await bcrypt.genSalt(15);
   this.password = await bcrypt.hash(this.password, salt);
+  next();
+});
+
+// Set role before saving
+userSchema.pre('save', function (next) {
+  if (this.name === 'admin' && this.email === 'admin@admin.com') {
+    this.role = 'admin';
+  } else {
+    this.role = 'user';
+  }
   next();
 });
 
