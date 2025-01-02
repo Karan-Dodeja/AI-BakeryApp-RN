@@ -1,12 +1,12 @@
-body, html {
+/* body, html {
     height: 100%;
     margin: 0;
     display: flex;
     justify-content: center;
     align-items: center;
-    background: url('path/to/your/background-image.jpg') no-repeat center center fixed;
+    background: transparent no-repeat center center fixed;
     background-size: cover;
-  }
+  } */
   
   .login-container {
     display: flex;
@@ -14,7 +14,7 @@ body, html {
     align-items: center;
     justify-content: center;
     padding: 20px;
-    background: rgba(255, 255, 255, 0.1);
+    background: rgba(0, 0, 0, 0.1);
     border: 1px solid rgba(255, 255, 255, 0.3);
     border-radius: 10px;
     backdrop-filter: blur(10px);
@@ -26,14 +26,16 @@ body, html {
   
   .login-container h2 {
     margin-bottom: 20px;
-    color: #fff;
+    color: #000;
   }
   
   .login-container input {
     width: 100%;
     padding: 10px;
+    color: #000;
     margin: 10px 0;
-    border: 1px solid #ddd;
+    background-color: white;
+    border: 1px solid #000;
     border-radius: 5px;
   }
   
@@ -41,7 +43,7 @@ body, html {
     width: 100%;
     padding: 10px;
     background-color: #4CAF50;
-    color: white;
+    color: 000;
     border: none;
     border-radius: 5px;
     cursor: pointer;
@@ -53,7 +55,7 @@ body, html {
   
   .login-container p {
     margin-top: 20px;
-    color: #fff;
+    color: #000;
   }
   
   .login-container a {

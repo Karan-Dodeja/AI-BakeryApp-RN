@@ -1,4 +1,4 @@
-body, html {
+/* body, html {
   height: 100%;
   margin: 0;
   display: flex;
@@ -6,15 +6,16 @@ body, html {
   align-items: center;
   background: url('path/to/your/background-image.jpg') no-repeat center center fixed;
   background-size: cover;
-}
+} */
 
 .signup-container {
+  height: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   padding: 20px;
-  background: rgba(255, 255, 255, 0.1);
+  background: rgba(0, 0, 0, 0.1);
   border: 1px solid rgba(255, 255, 255, 0.3);
   border-radius: 10px;
   backdrop-filter: blur(10px);
@@ -26,22 +27,24 @@ body, html {
 
 .signup-container h2 {
   margin-bottom: 20px;
-  color: #fff;
+  color: #000;
 }
 
 .signup-container input {
   width: 100%;
   padding: 10px;
   margin: 10px 0;
+  color: #000;
   border: 1px solid #ddd;
+  background-color: white;
   border-radius: 5px;
 }
 
 .signup-container button {
   width: 100%;
   padding: 10px;
-  background-color: #4CAF50;
-  color: white;
+  background-color: #4caf50;
+  color: #000;
   border: none;
   border-radius: 5px;
   cursor: pointer;
@@ -53,11 +56,11 @@ body, html {
 
 .signup-container p {
   margin-top: 20px;
-  color: #fff;
+  color: #000;
 }
 
 .signup-container a {
-  color: #4CAF50;
+  color: #4caf50;
   text-decoration: none;
 }
 

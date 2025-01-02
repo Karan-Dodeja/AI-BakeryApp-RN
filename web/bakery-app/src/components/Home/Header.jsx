@@ -2,6 +2,8 @@ import React from "react";
 import "./headerStyle.css"; // Assuming you have a CSS file for styling
 
 const Header = () => {
+  const isLoggedIn = !!localStorage.getItem("token");
+
   return (
     <header className="header">
       <div className="logo">BakeryApp</div>
@@ -12,8 +14,12 @@ const Header = () => {
           <li><a href="#about">About</a></li>
           <li><a href="#contact">Contact</a></li>
         </ul>
-        <a href="/login" className="btn">Login</a>
-        <a href="/signup" className="btn">Sign Up</a>
+        {!isLoggedIn && (
+          <>
+            <a href="/login" className="btn">Login</a>
+            <a href="/signup" className="btn">Sign Up</a>
+          </>
+        )}
       </nav>
     </header>
   );
