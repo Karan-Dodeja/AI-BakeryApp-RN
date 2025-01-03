@@ -39,12 +39,14 @@ const Login = () => {
         localStorage.setItem("token", response.data.token);
         localStorage.setItem("role", response.data.role);
         // Prevent from going back to the login page
-        navigate("/", { replace: true });
+        navigate("/", { replace: false });
       } else {
         setLoginError("Login failed. Please try again.");
       }
     } catch (error) {
-      setLoginError(error.response ? error.response.data.message : error.message);
+      setLoginError(
+        error.response ? error.response.data.message : error.message
+      );
     }
   };
 

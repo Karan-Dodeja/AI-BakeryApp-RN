@@ -5,6 +5,22 @@ const generateToken = (id) => {
   return jwt.sign({ id }, process.env.JWT_SECRET, { expiresIn: "30d" });
 };
 
+// Get all users
+export const getUsersEmail = async (req, res) => {
+  const { email } = req.query;
+  try {
+    const user = await User.findOne({ email });
+    if (user) {
+      res.json({ exists: true });
+    } else {
+      res.json({ exists: false });
+    }
+  } catch (error) {
+    console.error("Error checking email:", error);
+    res.status(500).json({ message: "Internal server error" });
+  }
+};
+
 // Register user
 export const registerUser = async (req, res) => {
   const { name, email, password } = req.body;
@@ -79,15 +95,6 @@ export const addToWishlist = async (req, res) => {
       user.wishlist.push(req.params.productId);
     }
     await user.save();
-    res.json(user.wishlist);
-  } catch (error) {
-    res.status(500).json({ message: error.message });
-  }
-};
-
-export const getWishlist = async (req, res) => {
-  try {
-    const user = await User.findById(req.user._id).populate("wishlist");
     res.json(user.wishlist);
   } catch (error) {
     res.status(500).json({ message: error.message });

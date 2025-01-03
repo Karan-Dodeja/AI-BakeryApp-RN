@@ -20,9 +20,16 @@ const Signup = () => {
   };
 
   const checkEmailExists = async (email) => {
-    const checkEmailUrl = `http://localhost:5000/api/users/register`;
+    const checkEmailUrl = `http://localhost:5000/api/users/checkEmail?email=${email}`;
     try {
-      const response = await axios.get(checkEmailUrl);
+      const response = await axios.get(checkEmailUrl, {
+        headers: {
+          "Content-Type": "application/json",
+          // Add any required authentication headers here
+        },
+      });
+      console.log(response.data.exists);
+      console.log(response)
       return response.data.exists;
     } catch (error) {
       console.error("Error checking email:", error);
@@ -45,18 +52,17 @@ const Signup = () => {
           "Content-Type": "application/json",
         },
       });
-      if (response.data.token) {
+      if (response.status === 200) {
         setSignupSuccess(true);
-        // Store token and role in localStorage
-        localStorage.setItem("token", response.data.token);
-        localStorage.setItem("role", response.data.role);
-        // Redirect to login page after successful signup
-        navigate("/login", { replace: false });
+        console.log(response);
+        navigate("/login");
       } else {
         setSignupError("Registration failed. Please try again.");
       }
     } catch (error) {
-      setSignupError(error.response ? error.response.data.message : error.message);
+      setSignupError(
+        error.response ? error.response.data.message : error.message
+      );
     }
   };
 
@@ -91,7 +97,9 @@ const Signup = () => {
         <button type="submit">Sign Up</button>
       </form>
       {signupError && <p className="error">{signupError}</p>}
-      {signupSuccess && <p className="success">Signup successful! Redirecting...</p>}
+      {signupSuccess && (
+        <p className="success">Signup successful! Redirecting...</p>
+      )}
       <p>
         Already have an account? <Link to="/login">Log in</Link>
       </p>
