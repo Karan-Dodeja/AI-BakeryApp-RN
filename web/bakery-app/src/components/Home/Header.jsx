@@ -38,7 +38,7 @@ const Header = () => {
           <li><a href="#contact">Contact</a></li>
           {isAdmin && <li><a href="/dashboard">Dashboard</a></li>}
         </ul>
-        {!isLoggedIn && (
+        {isLoggedIn && (
           <>
             <a href="/login" className="btn">Login</a>
             <a href="/signup" className="btn">Sign Up</a>

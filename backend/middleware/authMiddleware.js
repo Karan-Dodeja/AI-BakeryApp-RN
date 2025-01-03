@@ -8,7 +8,6 @@ export const protect = async (req, res, next) => {
     try {
       token = req.headers.authorization.split(' ')[1];
       const decoded = jwt.verify(token, process.env.JWT_SECRET);
-
       req.user = await User.findById(decoded.id).select('-password');
       next();
     } catch (error) {
@@ -18,5 +17,29 @@ export const protect = async (req, res, next) => {
 
   if (!token) {
     res.status(401).json({ message: 'Not authorized, no token' });
+  }
+};
+
+export const admin = (req, res, next) => {
+  if (req.user && req.user.role === 'admin') {
+    next();
+  } else {
+    res.status(403).json({ message: 'Not authorized as an admin' });
+  }
+};
+
+export const manager = (req, res, next) => {
+  if (req.user && req.user.role === 'manager') {
+    next();
+  } else {
+    res.status(403).json({ message: 'Not authorized as a manager' });
+  }
+};
+
+export const staff = (req, res, next) => {
+  if (req.user && req.user.role === 'staff') {
+    next();
+  } else {
+    res.status(403).json({ message: 'Not authorized as a staff' });
   }
 };
