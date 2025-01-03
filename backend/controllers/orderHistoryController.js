@@ -1,4 +1,4 @@
-const OrderHistoryService = require('../services/orderHistoryService');
+import OrderHistoryService from '../services/orderHistoryService.js';
 
 // ...existing code...
 

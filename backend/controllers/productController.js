@@ -1,4 +1,4 @@
-import Product from '../models/Product.js';
+import Product from "../models/Product.js";
 
 export const getProducts = async (req, res) => {
   const products = await Product.find({});
@@ -11,7 +11,7 @@ export const getProductById = async (req, res) => {
   if (product) {
     res.json(product);
   } else {
-    res.status(404).json({ message: 'Product not found' });
+    res.status(404).json({ message: "Product not found" });
   }
 };
 
@@ -45,7 +45,7 @@ export const updateProduct = async (req, res) => {
     const updatedProduct = await product.save();
     res.json(updatedProduct);
   } else {
-    res.status(404).json({ message: 'Product not found' });
+    res.status(404).json({ message: "Product not found" });
   }
 };
 
@@ -54,9 +54,9 @@ export const deleteProduct = async (req, res) => {
 
   if (product) {
     await product.remove();
-    res.json({ message: 'Product removed' });
+    res.json({ message: "Product removed" });
   } else {
-    res.status(404).json({ message: 'Product not found' });
+    res.status(404).json({ message: "Product not found" });
   }
 };
 
@@ -64,11 +64,11 @@ export const searchProducts = async (req, res) => {
   const { name, category, glutenFree, vegan, seasonal } = req.query;
   let query = {};
 
-  if (name) query.name = { $regex: name, $options: 'i' };
+  if (name) query.name = { $regex: name, $options: "i" };
   if (category) query.category = category;
-  if (glutenFree) query.glutenFree = glutenFree === 'true';
-  if (vegan) query.vegan = vegan === 'true';
-  if (seasonal) query.seasonal = seasonal === 'true';
+  if (glutenFree) query.glutenFree = glutenFree === "true";
+  if (vegan) query.vegan = vegan === "true";
+  if (seasonal) query.seasonal = seasonal === "true";
 
   try {
     const products = await Product.find(query);
@@ -81,6 +81,27 @@ export const searchProducts = async (req, res) => {
 export const getAllProducts = async (req, res) => {
   try {
     const products = await Product.find();
+    res.json(products);
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+};
+
+// Fetch products by category
+export const getProductsByCategory = async (req, res) => {
+  const { category } = req.params;
+  try {
+    const products = await Product.find({ category });
+    res.json(products);
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+};
+// Fetch products by tags
+export const getProductsByTags = async (req, res) => {
+  const { tags } = req.params;
+  try {
+    const products = await Product.find({ tags: { $in: tags.split(",") } });
     res.json(products);
   } catch (error) {
     res.status(500).json({ message: error.message });

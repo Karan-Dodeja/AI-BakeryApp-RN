@@ -1,5 +1,5 @@
-const User = require('../models/User'); // Assuming you have a User model
-const Product = require('../models/Product'); // Assuming you have a Product model
+import User from '../models/User.js'; // Assuming you have a User model
+import Product from '../models/Product.js'; // Assuming you have a Product model
 
 exports.getRecommendations = async (userId) => {
     // Business logic to get recommendations

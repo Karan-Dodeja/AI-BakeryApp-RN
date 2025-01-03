@@ -2,10 +2,10 @@ import express from "express";
 import dotenv from "dotenv";
 import cors from "cors";
 import bodyParser from "body-parser";
-import connectDB from "./src/config/db.js";
-import userRoutes from "./src/routes/userRoutes.js";
-import productroutes from "./src/routes/productRoutes.js";
-import auth from "./src/middleware/auth.js";
+import connectDB from "./config/db.js";
+import userRoutes from "./routes/userRoutes.js";
+import productroutes from "./routes/productRoutes.js";
+import auth from "./middleware/auth.js";
 import { trackOrderProgress } from "./services/trackingService.js"; // Import the tracking service
 
 dotenv.config();

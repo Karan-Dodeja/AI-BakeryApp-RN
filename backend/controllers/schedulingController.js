@@ -1,4 +1,4 @@
-const SchedulingService = require('../services/schedulingService');
+import SchedulingService from '../services/schedulingService.js';
 
 // Add other necessary imports if any
 // const OtherService = require('../services/otherService');

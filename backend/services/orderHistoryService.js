@@ -1,10 +1,10 @@
-const Order = require('../models/Order');
-const mongoose = require('mongoose');
-const User = require('../models/User');
+import Order from '../models/Order.js';
+import mongoose from 'mongoose';
+import User from '../models/User.js';
 
 // Middleware or other necessary imports
-const authMiddleware = require('../middleware/auth');
-const logger = require('../utils/logger');
+import authMiddleware from '../middleware/auth';
+import logger from '../utils/logger';
 
 // Additional setup or configuration
 mongoose.set('strictQuery', true);

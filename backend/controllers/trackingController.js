@@ -1,6 +1,6 @@
-const TrackingService = require('../services/trackingService');
-const OrderService = require('../services/orderService');
-const UserService = require('../services/userService');
+import TrackingService from '../services/trackingService.js';
+import OrderService from '../services/orderService.js';
+import UserService from '../services/userService.js';
 
 // Middleware to check if user is authenticated
 exports.isAuthenticated = (req, res, next) => {

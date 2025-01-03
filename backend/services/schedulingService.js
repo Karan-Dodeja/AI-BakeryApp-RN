@@ -1,5 +1,5 @@
-const Order = require('../models/Order'); // Assuming you have an Order model
-const User = require('../models/User'); // Assuming you have a User model
+import Order from '../models/Order.js'; // Assuming you have an Order model
+import User from '../models/User.js'; // Assuming you have a User model
 
 exports.scheduleOrder = async (userId, orderDetails, scheduleTime) => {
     // Business logic to schedule order for specific days or times

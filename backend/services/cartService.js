@@ -1,7 +1,7 @@
-const Product = require('../models/Product');
-const Cart = require('../models/Cart');
-const Order = require('../models/Order');
-const mongoose = require('mongoose');
+import Product from '../models/Product.js';
+import Cart from '../models/Cart.js';
+import Order from '../models/Order.js';
+import mongoose from 'mongoose';
 
 exports.addToCart = async (userId, productId, quantity) => {
     // Business logic to add product to cart
