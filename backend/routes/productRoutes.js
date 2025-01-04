@@ -14,12 +14,12 @@ import { protect, admin } from "../middleware/authMiddleware.js";
 
 const router = express.Router();
 
-router.get("/", getProducts);
-router.get("/category/:category", getProductsByCategory);
-router.get("/products", getAllProducts);
-router.get("/products/search", searchProducts);
-router.get("/tags/:tags", getProductsByTags);
-router.get("/:id", getProductById);
+router.get("/", protect, getProducts);
+router.get("/category/:category", protect, admin, getProductsByCategory);
+router.get("/products", protect, admin, getAllProducts);
+router.get("/products/search", protect, admin, searchProducts);
+router.get("/tags/:tags", protect, admin, getProductsByTags);
+router.get("/:id", protect, admin, getProductById);
 router.post("/", protect, admin, createProduct);
 router.put("/:id", protect, admin, updateProduct);
 router.delete("/:id", protect, admin, deleteProduct);

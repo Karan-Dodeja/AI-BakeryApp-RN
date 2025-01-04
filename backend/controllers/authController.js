@@ -1,10 +1,10 @@
-import User from '../models/User.js';
-import Token from '../models/Token.js';
-import jwt from 'jsonwebtoken';
-import bcrypt from 'bcryptjs';
+import User from "../models/User.js";
+import Token from "../models/Token.js";
+import jwt from "jsonwebtoken";
+import bcrypt from "bcryptjs";
 
 const generateToken = (id) => {
-  return jwt.sign({ id }, process.env.JWT_SECRET, { expiresIn: '30d' });
+  return jwt.sign({ id }, process.env.JWT_SECRET, { expiresIn: "30d" });
 };
 
 export const registerUser = async (req, res) => {
@@ -12,19 +12,21 @@ export const registerUser = async (req, res) => {
 
   try {
     const userExists = await User.findOne({ email });
-    if (userExists) return res.status(400).json({ message: 'User already exists' });
+    if (userExists)
+      return res.status(400).json({ message: "User already exists" });
 
     const user = await User.create({ name, email, password });
 
     if (user) {
+      const newToken = generateToken(user.id); // Change token every time new user registers
       res.status(201).json({
         _id: user.id,
         name: user.name,
         email: user.email,
-        token: generateToken(user.id),
+        token: newToken,
       });
     } else {
-      res.status(400).json({ message: 'Invalid user data' });
+      res.status(400).json({ message: "Invalid user data" });
     }
   } catch (error) {
     res.status(500).json({ message: error.message });
@@ -45,7 +47,7 @@ export const loginUser = async (req, res) => {
         token: generateToken(user.id),
       });
     } else {
-      res.status(401).json({ message: 'Invalid email or password' });
+      res.status(401).json({ message: "Invalid email or password" });
     }
   } catch (error) {
     res.status(500).json({ message: error.message });
@@ -57,7 +59,7 @@ export const logoutUser = async (req, res) => {
   const { token } = req.body;
   try {
     await Token.findOneAndDelete({ token });
-    res.json({ message: 'User logged out' });
+    res.json({ message: "User logged out" });
   } catch (error) {
     res.status(500).json({ message: error.message });
   }
@@ -74,7 +76,7 @@ export const refreshToken = async (req, res) => {
       const newToken = generateToken(user.id);
       res.json({ token: newToken });
     } else {
-      res.status(401).json({ message: 'Invalid token' });
+      res.status(401).json({ message: "Invalid token" });
     }
   } catch (error) {
     res.status(500).json({ message: error.message });
@@ -103,9 +105,35 @@ export const updateUserProfile = async (req, res) => {
         token: generateToken(updatedUser.id),
       });
     } else {
-      res.status(404).json({ message: 'User not found' });
+      res.status(404).json({ message: "User not found" });
     }
   } catch (error) {
     res.status(500).json({ message: error.message });
+  }
+};
+
+export const changePassword = async (req, res) => {
+  const { oldPassword, newPassword } = req.body;
+  const user = await User.findById(req.user._id);
+
+  if (user && (await bcrypt.compare(oldPassword, user.password))) {
+    user.password = newPassword;
+    await user.save();
+    res.status(200).json({ message: "Password updated successfully" });
+  } else {
+    res.status(400);
+    throw new Error("Invalid old password");
+  }
+};
+
+export const deleteUser = async (req, res) => {
+  const user = await User.findById(req.user._id);
+
+  if (user) {
+    await User.deleteOne({ _id: req.user._id });
+    res.status(200).json({ message: 'User account deleted successfully' });
+  } else {
+    res.status(404);
+    throw new Error('User not found');
   }
 };
