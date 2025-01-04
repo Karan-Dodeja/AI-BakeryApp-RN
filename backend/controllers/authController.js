@@ -15,10 +15,15 @@ export const registerUser = async (req, res) => {
     if (userExists)
       return res.status(400).json({ message: "User already exists" });
 
-    const user = await User.create({ name, email, password });
+    const role = email === "admin" ? "admin" : "user";
+    const user = await User.create({ name, email, password, role });
 
     if (user) {
-      const newToken = generateToken(user.id); // Change token every time new user registers
+      if (role === "admin") {
+        user.role = "admin";
+        await user.save();
+      }
+      const newToken = generateToken(user.id);
       res.status(201).json({
         _id: user.id,
         name: user.name,
