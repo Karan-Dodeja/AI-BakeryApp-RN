@@ -1,5 +1,27 @@
 import Order from '../models/Order.js';
 
+import { trackOrderProgress } from '../services/trackingService.js';
+
+export const trackOrder = async (req, res) => {
+  try {
+    const { orderId } = req.params;
+    const order = await Order.findById(orderId);
+
+    if (order) {
+      if (order.user.toString() !== req.user._id.toString()) {
+        return res.status(401).json({ message: 'Not authorized to track this order' });
+      }
+
+      const orderProgress = trackOrderProgress(orderId);
+      res.json(orderProgress);
+    } else {
+      res.status(404).json({ message: 'Order not found' });
+    }
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+};
+
 export const createOrder = async (req, res) => {
   const { orderItems, deliveryDetails, paymentInfo } = req.body;
 
@@ -13,6 +35,9 @@ export const createOrder = async (req, res) => {
     orderItems,
     deliveryDetails,
     paymentInfo,
+    status: 'Pending',
+    createdAt: new Date(),
+    updatedAt: new Date(),
   });
 
   try {
@@ -97,3 +122,38 @@ export const cancelOrder = async (req, res) => {
     res.status(500).json({ message: error.message });
   }
 };
+
+export const updateDeliveryStatus = async (req, res) => {
+  try {
+    const order = await Order.findById(req.params.id);
+
+    if (order) {
+      order.deliveryStatus = req.body.deliveryStatus || order.deliveryStatus;
+
+      const updatedOrder = await order.save();
+      res.json(updatedOrder);
+    } else {
+      res.status(404).json({ message: 'Order not found' });
+    }
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+};
+
+export const updatePaymentStatus = async (req, res) => {
+  try {
+    const order = await Order.findById(req.params.id);
+
+    if (order) {
+      order.paymentInfo.status = req.body.status || order.paymentInfo.status;
+
+      const updatedOrder = await order.save();
+      res.json(updatedOrder);
+    } else {
+      res.status(404).json({ message: 'Order not found' });
+    }
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+};
+

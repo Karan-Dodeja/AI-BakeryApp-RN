@@ -9,6 +9,7 @@ import productRoutes from './routes/productRoutes.js';
 import adminRoutes from './routes/adminRoutes.js';
 import miscRoutes from './routes/miscRoutes.js';
 import authRoutes from './routes/authRoutes.js';
+import orderRoutes from './routes/orderRoutes.js'; // Import the order routes
 import { trackOrderProgress } from './services/trackingService.js'; // Import the tracking service
 
 dotenv.config();
@@ -24,6 +25,7 @@ app.use('/api/products', productRoutes); // Endpoint to manage products
 app.use('/api/admin', adminRoutes); // Endpoint to manage admin routes
 app.use('/api/misc', miscRoutes); // Endpoint to manage miscellaneous routes
 app.use('/api/auth', authRoutes); // Endpoint to manage auth routes
+app.use('/api/orders', orderRoutes); // Endpoint to manage orders
 
 
 // Example of a protected route using the tracking service

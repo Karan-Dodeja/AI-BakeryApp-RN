@@ -1,7 +1,18 @@
 import mongoose from 'mongoose';
 
-const orderSchema = new mongoose.Schema({
-  user: { type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true },
+const orderSchema = mongoose.Schema({
+  userId: {
+    type: mongoose.Schema.Types.ObjectId,
+    required: true,
+    ref: 'User'
+  },
+  items: [
+    {
+      name: { type: String, required: true },
+      quantity: { type: Number, required: true },
+      price: { type: Number, required: true }
+    }
+  ],
   orderItems: [
     {
       product: { type: mongoose.Schema.Types.ObjectId, ref: 'Product', required: true },
@@ -18,8 +29,16 @@ const orderSchema = new mongoose.Schema({
     method: { type: String, required: true },
     status: { type: String, required: true },
   },
-  status: { type: String, default: 'Pending' },
+  status: {
+    type: String,
+    required: true,
+    default: 'Pending'
+  },
   deliveryDate: { type: Date }, // New field added
-}, { timestamps: true });
+}, {
+  timestamps: true
+});
 
-export default mongoose.model('Order', orderSchema);
+const Order = mongoose.model('Order', orderSchema);
+
+export default Order;
